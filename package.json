@@ -15,5 +15,15 @@
   "bugs": {
     "url": "https://github.com/xyz-mail1/maggie/issues"
   },
-  "homepage": "https://github.com/xyz-mail1/maggie#readme"
+  "homepage": "https://github.com/xyz-mail1/maggie#readme",
+  "dependencies": {
+    "better-module-alias": "^1.2.1",
+    "better-sqlite3": "^9.2.2",
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "node-fetch": "^2.6.7",
+    "pino": "^8.17.2",
+    "pino-pretty": "^10.3.1",
+    "pretty-error": "^4.0.0"
+  }
 }
