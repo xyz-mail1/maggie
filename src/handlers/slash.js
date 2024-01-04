@@ -1,12 +1,17 @@
 const fs = require("fs");
 
 module.exports = (client) => {
-  const folders = fs.readdirSync(`./src/slash`);
+  const folders = fs.readdirSync(`./src/slash/`);
   for (const folder of folders) {
     const files = fs.readdirSync(`./src/slash/${folder}`);
     for (const file of files) {
       const command = require(`../slash/${folder}/${file}`);
-      client.slash.set(command.name, command);
+      if ("data" in command && "run" in command) {
+        client.slash.set(command.data.name, command);
+      } else {
+        console.log(`Slash command ${file} did'nt register`);
+      }
+      client.logger.log(`${folder} loaded with ${files.length} (/) commands`);
     }
   }
 };
