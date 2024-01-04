@@ -23,9 +23,9 @@ module.exports = {
         .setDescription(`${message.author} gives ${mention} a blowjob`)
         .setImage(gif.link);
       if (count === 1) {
-        embed.setFooter({ text: `It's their first blowjob from you!` });
+        embed.setFooter({ text: `blowjob count: 1` });
       } else {
-        embed.setFooter({ text: `That's a total of ${count} blowjobs now!` });
+        embed.setFooter({ text: `blowjob count: ${count}` });
       }
       await message.reply({
         embeds: [embed],
