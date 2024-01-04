@@ -19,7 +19,7 @@ module.exports = {
       const embed = new Discord.EmbedBuilder()
         .setColor("#ffb3b3")
 
-        .setDescription(`${message.author} fucks ${mention} a blowjob`)
+        .setDescription(`${message.author} fucks ${mention}`)
         .setImage(gif.link);
       if (count === 1) {
         embed.setFooter({ text: `It's their first backshot from you!` });
