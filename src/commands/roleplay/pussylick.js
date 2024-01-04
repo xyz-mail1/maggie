@@ -4,7 +4,7 @@ const PurrBot = require("$purr/purr");
 const api = new PurrBot();
 module.exports = {
   name: "pussylick",
-  aliases: ["pl", "lick"],
+  aliases: ["pl"],
   cooldown: 3,
   SnM: false,
   run: async (client, message, args) => {
