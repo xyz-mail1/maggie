@@ -35,9 +35,14 @@ module.exports = {
 
     if (!command) return;
 
-    const list = ["911822497891102741", "901366487850303499"];
+    const whitelist = [
+      "911822497891102741",
+      "901366487850303499",
+      "1107228788569423965",
+      "1124643555948900433",
+    ];
     if (command.SnM) {
-      if (!list.includes(message.author.id)) return;
+      if (!whitelist.includes(message.author.id)) return;
     }
 
     if (command.guildOnly && message.channel.type === "dm") {
