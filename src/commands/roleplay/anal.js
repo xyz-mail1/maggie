@@ -5,7 +5,7 @@ const api = new PurrBot();
 module.exports = {
   name: "anal",
   cooldown: 3,
-  SnM: true,
+  SnM: false,
   run: async (client, message, args) => {
     const sender = message.author.id;
     const mention = message.mentions.users.first() || message.author;
