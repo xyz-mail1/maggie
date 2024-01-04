@@ -11,11 +11,12 @@ module.exports = {
     const sender = message.author.id;
     const mention = message.mentions.users.first() || message.author;
     const target = mention.id;
-
+    const gif = await api.nsfw("blowjob");
+    if (!gif) return;
     if (target) {
       client.incrementCount("blowjobs", sender, target);
       const count = await client.getCount("blowjobs", sender, target);
-      const gif = await api.nsfw("blowjob");
+
       const embed = new Discord.EmbedBuilder()
         .setColor("#ffb3b3")
         .setTitle("You gave a blowjob!")
