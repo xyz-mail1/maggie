@@ -22,9 +22,9 @@ module.exports = {
         .setDescription(`${message.author} fucks ${mention}`)
         .setImage(gif.link);
       if (count === 1) {
-        embed.setFooter({ text: `${this.name} count: 1` });
+        embed.setFooter({ text: `fuck count: 1` });
       } else {
-        embed.setFooter({ text: `${this.name} count: ${count}` });
+        embed.setFooter({ text: `fuck count: ${count}` });
       }
       await message.reply({
         embeds: [embed],
