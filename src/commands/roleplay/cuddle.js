@@ -18,7 +18,7 @@ module.exports = {
 
       const embed = new Discord.EmbedBuilder()
         .setColor("#ffb3b3")
-        .setDescription(`${message.author} bites ${mention}`)
+        .setDescription(`${message.author} cuddles ${mention}`)
         .setImage(gif.link);
       if (count === 1) {
         embed.setFooter({ text: `cuddle count: 1` });
