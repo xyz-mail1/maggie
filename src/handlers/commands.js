@@ -28,6 +28,6 @@ module.exports = (client) => {
     }
     client.logger.log(`Loaded ${individual} commands from ${folder}`);
   }
-  console.log("\n");
+
   client.logger.log(`Loaded total ${total} commands`);
 };

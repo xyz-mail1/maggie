@@ -12,12 +12,14 @@ module.exports = (client) => {
         client.slash.set(command.name, command);
         commands.push(command);
 
-        client.logger.log(`${folder} loaded with ${files.length} (/) commands`);
+        client.logger.log(
+          `${folder.toUpperCase()} loaded with ${files.length} (/) commands`,
+        );
       }
     }
     const rest = new REST().setToken(process.env.token);
     (async () => {
-      console.log(
+      client.logger.log(
         `Started refreshing ${commands.length} application (/) commands.`,
       );
 
@@ -27,11 +29,11 @@ module.exports = (client) => {
           body: commands,
         },
       );
-      console.log(
+      client.logger.log(
         `Successfully reloaded ${data.length} application (/) commands.`,
       );
     })();
   } catch (error) {
-    console.log(`Error in slash command handler: \n${error}`);
+    client.logger.error(`Error in slash command handler: \n${error}`);
   }
 };
