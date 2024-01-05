@@ -12,12 +12,14 @@ module.exports = {
     const target = mention.id;
     const gif = await api.nsfw("anal");
     if (!gif) return message.reply("Error finding gif");
+    const arr = await client.getColor(gif.link);
+    const a = client.getRandomColor();
     if (target) {
       client.incrementCount("anal", sender, target);
       const count = await client.getCount("anal", sender, target);
 
       const embed = new Discord.EmbedBuilder()
-        .setColor("#ffb3b3")
+        .setColor(a)
 
         .setDescription(`${message.author} fucks ${mention}`)
         .setImage(gif.link);
