@@ -98,24 +98,7 @@ module.exports = {
     try {
       command.run(client, message, args);
     } catch (error) {
-      if (error && error.length > 900) error = error.slice(0, 900) + "...";
-      if (error.stack) {
-        if (error.stack.length > 900)
-          error.stack = error.stack.slice(0, 900) + "...";
-      }
-      const embed = new EmbedBuilder()
-        .setTitle("Prefix command error")
-        .addFields([
-          {
-            name: "Error",
-            value: error ? codeBlock(error) : "No error",
-          },
-          {
-            name: "Stack",
-            value: error.stack ? codeBlock(error) : "No stack",
-          },
-        ]);
-      errors.send({ embeds: [embed] });
+      console.log(error);
     }
   },
 };

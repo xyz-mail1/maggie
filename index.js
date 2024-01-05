@@ -10,7 +10,7 @@ const token = process.env.token,
   client = new BotClient();
 
 client.loadHandlers();
-const { WebhookClient, EmbedBuilder } = require("discord.js");
+const { WebhookClient, EmbedBuilder, codeBlock } = require("discord.js");
 const webhook = new WebhookClient({ url: process.env.webhook });
 /*(async () => {
   const test = await client.getColor(
@@ -41,9 +41,28 @@ process.on("unhandledRejection", (error) => {
   webhook.send({ embeds: [embed] });
   console.log(error);
 });
-process.on("uncaughtException", (err) => {
-  console.log("test");
-  console.log(pe.render(err));
+process.on("uncaughtException", (error) => {
+  const message =
+    error.message.length > 950
+      ? `${error.message.slice(0, 950)}...`
+      : error.message;
+  const stack = error.stack
+    ? error.stack.length > 950
+      ? `${error.stack.slice(0, 950)}...`
+      : error.stack
+    : "No stack error";
+  const embed = new EmbedBuilder().addFields([
+    {
+      name: "Error",
+      value: codeBlock(message),
+    },
+    {
+      name: "Stack",
+      value: codeBlock(stack),
+    },
+  ]);
+  webhook.send({ embeds: [embed] }).catch(console.error);
+  console.log(pe.render(error));
 });
 
 client.login(token);
