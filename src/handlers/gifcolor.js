@@ -2,13 +2,24 @@ const getColors = require("get-image-colors");
 
 module.exports = (client) => {
   client.getColor = async (link) => {
-    let arr = [];
-    getColors(link, function (err, colors) {
-      if (err) client.logger.error(err);
-      arr = colors.map((c) => c.hex());
+    return new Promise((resolve, reject) => {
+      getColors(link, function(err, colors) {
+        if (err) {
+          console.log(err);
+          reject(err);
+        } else {
+          const colorArray = colors.map((c) => c.hex());
+          const getRandomColor = function() {
+            return colorArray[Math.floor(Math.random() * colorArray.length)];
+          };
+          client.getRandomColor = getRandomColor;
+
+          resolve(colorArray);
+        }
+      });
     });
-    this.color = function () {
-      return arr[Math.floor(Math.random() * arr.length)];
-    };
   };
+  return new Promise((resolve) => {
+    resolve();
+  });
 };
