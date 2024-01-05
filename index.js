@@ -11,9 +11,8 @@ client.loadHandlers();
 const test = client.getColor(
   "https://purrbot.site/img/sfw/cuddle/gif/cuddle_038.gif",
 );
-const test2 = test.color();
+
 console.log(test);
-console.log(test2);
 
 process.on("unhandledRejection", (err) =>
   console.log(`Unhandled exception\n`, err),
