@@ -1,12 +1,12 @@
 const {
   Collection,
   Events,
-  EmbedBuilder: E,
-  WebhookClient: W,
+  EmbedBuilder,
+  WebhookClient,
   codeBlock,
 } = require("discord.js");
-const cooldowns = new Collection();
-const errorLogs = new W({ url: `${process.env.errorHook}` });
+//const cooldowns = new Collection();
+//const errorLogs = new W({ url: `${process.env.errorHook}` });
 
 var PrettyError = require("pretty-error");
 var pe = new PrettyError();
@@ -16,15 +16,20 @@ module.exports = {
     let client = message.client;
     const ping = `<@${client.user.id}>`;
     const prefixes = ["sm", "!", "shivie", "maggie", "love", ping];
+
     if (message.author.bot) return;
+
     const lowercasedMessage = message.content.toLowerCase();
     const prefixUsed = prefixes.find((prefix) =>
       lowercasedMessage.startsWith(prefix.toLowerCase()),
     );
+
     if (!prefixUsed) return;
+
     const strippedMessage = lowercasedMessage.slice(prefixUsed.length);
 
     const args = strippedMessage.trim().split(" ");
+
     const commandName = args.shift().toLowerCase();
 
     const command =
@@ -41,6 +46,7 @@ module.exports = {
       "1107228788569423965",
       "1124643555948900433",
     ];
+
     if (command.SnM) {
       if (!whitelist.includes(message.author.id)) return;
     }
@@ -51,11 +57,9 @@ module.exports = {
 
     if (command.args && !args.length) {
       let reply = `You didn't provide any arguments, ${message.author}!`;
-
       if (command.usage) {
         reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``;
       }
-
       return message.channel.send(reply);
     }
 
@@ -74,11 +78,16 @@ module.exports = {
 
       if (now < expirationTime) {
         const timeLeft = (expirationTime - now) / 1000;
-        return message.reply(
-          `please wait ${timeLeft.toFixed(
-            1,
-          )} more second(s) before reusing the \`${command.name}\` command.`,
-        );
+        return message
+          .reply(
+            `please wait ${timeLeft.toFixed(
+              1,
+            )} more second(s) before reusing the \`${command.name}\` command.`,
+          )
+          .then((reply) => {
+            message.delete({ timeout: timeLeft });
+            reply.delete({ timeout: timeLeft });
+          });
       }
     }
 
