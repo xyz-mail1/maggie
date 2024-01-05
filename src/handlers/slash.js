@@ -8,11 +8,10 @@ module.exports = (client) => {
       const files = fs.readdirSync(`./src/slash/${folder}`);
       for (const file of files) {
         const command = require(`../slash/${folder}/${file}`);
-        if ("data" in command && "run" in command) {
-          commands.push(command.data.toJSON());
-        } else {
-          console.log(`Slash command ${file} did'nt register`);
-        }
+
+        client.slash.set(command.name, command);
+        commands.push(command);
+
         client.logger.log(`${folder} loaded with ${files.length} (/) commands`);
       }
     }
