@@ -2,7 +2,7 @@ require("dotenv").config();
 require("better-module-alias")(__dirname, {
   $purr: "./wrapper/",
 });
-
+require("pretty-error").start();
 const token = process.env.token,
   BotClient = require(`./src/helpers/bot`),
   client = new BotClient();
