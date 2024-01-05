@@ -47,15 +47,21 @@ module.exports = {
       "1107228788569423965",
       "1124643555948900433",
     ];
-
+    // check for commands that only shiv and maggie can use
+    // 
     if (command.SnM) {
       if (!whitelist.includes(message.author.id)) return;
     }
 
+    // checks for guild only commands
+    //
     if (command.guildOnly && message.channel.type === "dm") {
       return message.reply("I can't execute that command inside DMs!");
     }
 
+
+
+    // check if args are required
     if (command.args && !args.length) {
       let reply = `You didn't provide any arguments, ${message.author}!`;
       if (command.usage) {
@@ -63,7 +69,7 @@ module.exports = {
       }
       return message.channel.send(reply);
     }
-
+    // cooldown
     const { cooldowns } = client;
 
     if (!cooldowns.has(command.name)) {
