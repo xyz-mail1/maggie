@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const color = require("get-image-colors");
+
 const PurrBot = require("$purr/purr");
 const api = new PurrBot();
 module.exports = {
@@ -12,10 +12,8 @@ module.exports = {
     const target = mention.id;
     const gif = await api.sfw("cuddle");
     if (!gif) return;
-    await color(gif.link).then((colors) => {
-      const test = colors.map((c) => c.hex());
-      console.log(test[0]);
-    });
+    const test = await client.gifColor(gif.link);
+    console.log(test.color);
 
     if (target) {
       client.incrementCount("cuddles", sender, target);
