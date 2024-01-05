@@ -1,13 +1,14 @@
 const fs = require("fs");
 
 module.exports = (client) => {
+  let total = 0; // all commands loaded
   const commandFolders = fs.readdirSync("./src/commands");
 
   for (const folder of commandFolders) {
     const commandFiles = fs
       .readdirSync(`./src/commands/${folder}`)
       .filter((file) => file.endsWith(".js"));
-
+    let individual = 0; // commands loaded from foldeds
     for (const file of commandFiles) {
       try {
         const command = require(`../commands/${folder}/${file}`);
@@ -19,10 +20,14 @@ module.exports = (client) => {
         }
 
         client.commands.set(command.name, command);
-        client.logger.log(`Loaded command: ${command.name}`);
+        total++;
+        individual++;
       } catch (err) {
         client.logger.error(`Failed to load ${file}. Reason: ${err.message}`);
       }
     }
+    client.logger.log(`Loaded ${individual} commands from ${folder}`);
   }
+  console.log("\n");
+  client.logger.log(`Loaded total ${total} commands`);
 };
