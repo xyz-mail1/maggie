@@ -8,12 +8,13 @@ const token = process.env.token,
   client = new BotClient();
 
 client.loadHandlers();
-const test = client.getColor(
-  "https://purrbot.site/img/sfw/cuddle/gif/cuddle_038.gif",
-);
 
-console.log(test);
-
+(async () => {
+  const test = await client.getColor(
+    "https://purrbot.site/img/sfw/cuddle/gif/cuddle_038.gif",
+  );
+  console.log(test.color);
+})();
 process.on("unhandledRejection", (err) =>
   console.log(`Unhandled exception\n`, err),
 );
