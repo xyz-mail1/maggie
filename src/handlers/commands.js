@@ -19,7 +19,7 @@ module.exports = (client) => {
         }
 
         client.commands.set(command.name, command);
-        client.logger.info(`Loaded command: ${command.name}`);
+        client.logger.log(`Loaded command: ${command.name}`);
       } catch (err) {
         client.logger.error(`Failed to load ${file}. Reason: ${err.message}`);
       }
