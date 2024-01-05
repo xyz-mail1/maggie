@@ -1,5 +1,5 @@
 const sqlite = require("better-sqlite3");
-const db = new sqlite(`../../main.db`);
+const db = new sqlite("./new.db");
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS counts (
@@ -12,7 +12,7 @@ db.exec(`
 `);
 
 module.exports = (client) => {
-  client.incrementCount = async function (variable, sender, target) {
+  client.incrementCount = async function(variable, sender, target) {
     // Check if entry for the users already exists in the db
     const select = db.prepare(
       `SELECT * FROM counts WHERE (variable = ? AND sender = ? AND target = ?) OR (variable = ? AND sender = ? AND target = ?)`,
@@ -38,7 +38,7 @@ module.exports = (client) => {
     }
   };
 
-  client.getCount = async function (variable, sender, target) {
+  client.getCount = async function(variable, sender, target) {
     const stmt = db.prepare(
       "SELECT count FROM counts WHERE (variable = ? AND sender = ? AND target = ?) OR (variable = ? AND sender = ? AND target = ?)",
     );
