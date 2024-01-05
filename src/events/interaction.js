@@ -1,14 +1,16 @@
 const { Events, InteractionType } = require("discord.js");
-
+const PE = require("pretty-error");
+var pe = new PE();
 module.exports = {
   name: Events.InteractionCreate,
   execute: async (interaction) => {
     let client = interaction.client;
     if (!interaction.isChatInputCommand()) return;
 
-    const command = client.slash.get(interaction.commandName);
+    const command = interaction.client.commands.get(interaction.commandName);
 
     if (!command) {
+      interaction.reply("error");
       console.error(
         `No command matching ${interaction.commandName} was found.`,
       );
