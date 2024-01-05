@@ -19,7 +19,7 @@ module.exports = {
       const count = await client.getCount("anal", sender, target);
 
       const embed = new Discord.EmbedBuilder()
-        .setColor(a)
+        .setColor(await client.getRandomColor(gif.link))
 
         .setDescription(`${message.author} fucks ${mention}`)
         .setImage(gif.link);
