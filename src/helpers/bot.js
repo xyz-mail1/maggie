@@ -1,12 +1,12 @@
 const {
-    Client,
-    GatewayIntentBits: GB,
-    Partials,
-    Collection,
-  } = require("discord.js"),
+  Client,
+  GatewayIntentBits: GB,
+  Partials,
+  Collection,
+} = require("discord.js"),
   fs = require("node:fs"),
   Logger = require(`./logger`);
-
+const getColors = require("get-image-colors");
 module.exports = class BotClient extends Client {
   constructor() {
     super({
@@ -47,9 +47,21 @@ module.exports = class BotClient extends Client {
     this.logger = Logger;
 
     this.commands = new Collection();
+    0;
     this.slash = new Collection();
     this.cooldowns = new Collection();
   }
+  gifColor(link) {
+    let arr = [];
+    getColors(link, function(err, colors) {
+      if (err) this.logger.error(err);
+      arr = colors.map((c) => c.hex());
+    });
+    this.color = function() {
+      return arr[Math.floor(Math.random() * arr.length)];
+    };
+  }
+
   loadHandlers() {
     const handlers = fs.readdirSync("./src/handlers");
 
