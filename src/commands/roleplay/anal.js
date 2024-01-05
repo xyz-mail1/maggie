@@ -11,9 +11,9 @@ module.exports = {
     const mention = message.mentions.users.first() || message.author;
     const target = mention.id;
     const gif = await api.nsfw("anal");
-    if (!gif) return message.reply("Error finding gif");
-    const arr = await client.getColor(gif.link);
-    const a = client.getRandomColor();
+    if (!gif) return message.reply(`error`);
+    const a = await client.getRandomColor(gif.link);
+
     if (target) {
       client.incrementCount("anal", sender, target);
       const count = await client.getCount("anal", sender, target);

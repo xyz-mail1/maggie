@@ -88,6 +88,7 @@ module.exports = {
     try {
       command.run(client, message, args);
     } catch (error) {
+      message.channel.send(error.message);
       if (error)
         if (error.length > 950)
           error = error.slice(0, 950) + "... view console for details";
