@@ -17,7 +17,7 @@ module.exports = {
       const count = await client.getCount("slaps", sender, target);
 
       const embed = new Discord.EmbedBuilder()
-        .setColor("#ffb3b3")
+        .setColor(await client.getRandomColor(gif.link))
         .setDescription(`${message.author} slaps ${mention}`)
         .setImage(gif.link);
       if (count === 1) {

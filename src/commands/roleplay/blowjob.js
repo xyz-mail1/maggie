@@ -18,7 +18,7 @@ module.exports = {
       const count = await client.getCount("blowjobs", sender, target);
 
       const embed = new Discord.EmbedBuilder()
-        .setColor("#ffb3b3")
+        .setColor(await client.getRandomColor(gif.link))
 
         .setDescription(`${message.author} gives ${mention} a blowjob`)
         .setImage(gif.link);
