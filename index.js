@@ -20,8 +20,6 @@ client.loadHandlers();
   console.log(a);
 })();*/
 process.on("unhandledRejection", (err) => console.log(pe.render(err)));
-process.on("uncaughtException", (err) =>
-  console.log(pe.render(`Uncaught Exception\n`, err)),
-);
+process.on("uncaughtException", (err) => console.log(pe.render(err)));
 
 client.login(token);

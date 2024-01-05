@@ -10,7 +10,7 @@ module.exports = {
     const sender = message.author.id;
     const mention = message.mentions.users.first() || message.author;
     const target = mention.id;
-    const gif = await api.nsfw("anal");
+    const gif = await api.sfw("anal");
     if (!gif) return message.reply(`error`);
     const a = await client.getRandomColor(gif.link);
 

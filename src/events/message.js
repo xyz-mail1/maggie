@@ -5,15 +5,16 @@ const {
   WebhookClient,
   codeBlock,
 } = require("discord.js");
-//const cooldowns = new Collection();
-//const errorLogs = new W({ url: `${process.env.errorHook}` });
 
 var PrettyError = require("pretty-error");
 var pe = new PrettyError();
+
 module.exports = {
   name: Events.MessageCreate,
   execute: async (message) => {
+    const errors = new WebhookClient({ url: process.env.webhook });
     let client = message.client;
+    if (message.author === client) return;
     const ping = `<@${client.user.id}>`;
     const prefixes = ["sm", "!", "shivie", "maggie", "love", ping];
 
@@ -97,29 +98,24 @@ module.exports = {
     try {
       command.run(client, message, args);
     } catch (error) {
-      message.channel.send(error.message);
-      if (error)
-        if (error.length > 950)
-          error = error.slice(0, 950) + "... view console for details";
-      if (error.stack)
-        if (error.stack.length > 950)
-          error.stack =
-            error.stack.slice(0, 950) + "... view console for details";
-      if (!error.stack) return;
-      const errorEmbed = new E().setTitle(`⛔ Prefix command error`).addFields([
-        { name: "Error", value: error ? codeBlock(error) : "No error" },
-        {
-          name: "Stack error",
-          value: error.stack ? codeBlock(error.stack) : "No stack error",
-        },
-      ]);
-      console.log(pe.render(error));
-      try {
-        errorLogs.send({ embeds: [errorEmbed] });
-      } catch {
-        console.log("Error sending prefix command to webhook");
-        console.log(pe.render(error));
+      if (error && error.length > 900) error = error.slice(0, 900) + "...";
+      if (error.stack) {
+        if (error.stack.length > 900)
+          error.stack = error.stack.slice(0, 900) + "...";
       }
+      const embed = new EmbedBuilder()
+        .setTitle("Prefix command error")
+        .addFields([
+          {
+            name: "Error",
+            value: error ? codeBlock(error) : "No error",
+          },
+          {
+            name: "Stack",
+            value: error.stack ? codeBlock(error) : "No stack",
+          },
+        ]);
+      errors.send({ embeds: [embed] });
     }
   },
 };
