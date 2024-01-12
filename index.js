@@ -12,14 +12,7 @@ const token = process.env.token,
 client.loadHandlers();
 const { WebhookClient, EmbedBuilder, codeBlock } = require("discord.js");
 const webhook = new WebhookClient({ url: process.env.webhook });
-/*(async () => {
-  const test = await client.getColor(
-    "https://purrbot.site/img/sfw/cuddle/gif/cuddle_038.gif",
-  );
 
-  const a = client.getRandomColor();
-  console.log(a);
-})();*/
 process.on("unhandledRejection", (error) => {
   if (error.length > 900) {
     error = error.slice(0, 900) + "...";
