@@ -18,7 +18,7 @@ module.exports = {
       const count = await client.getCount("bites", sender, target);
 
       const embed = new Discord.EmbedBuilder()
-        .setColor(await client.getRandomColor(gif.link))
+        .setColor("Random")
         .setDescription(`${message.author} bites ${mention}`)
         .setImage(gif.link);
       if (count === 1) {
